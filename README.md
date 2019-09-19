@@ -9,6 +9,9 @@ Exported project for KEIL
 This code uses HAL library
 
 
+
 I measured the current consumption (Power LED removed):
+
 during stop mode:	~ 92 uA
+
 during running:		~ 3mA
