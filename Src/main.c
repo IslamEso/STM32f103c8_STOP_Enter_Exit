@@ -77,9 +77,19 @@ void power_down(void)
 	//RTC_SetTime(0x23, 0x59, 0x55);
 	/* Set Alarm to 00:00:10 */
 	//RTC_SetAlarmTo(0x00, 0x00, 0x10);
-	// --------------------- Setting RTC Alarm -----------------
+	// --------------------- Deinitializing All Drivers -----------------
+	HAL_ADC_DeInit(&hadc1);
+	HAL_UART_DeInit(&huart1);
+	HAL_UART_DeInit(&huart2);
+	HAL_SPI_DeInit(&hspi1);
+	HAL_DBGMCU_DisableDBGSleepMode();
+	HAL_DBGMCU_DisableDBGStopMode();
+	HAL_DBGMCU_DisableDBGStandbyMode();
+	
+	// --------------------- Enter Stop Mode-----------------
+
 	HAL_SuspendTick();
-  HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);//PWR_MAINREGULATOR_ON/PWR_LOWPOWERREGULATOR_ON
+	HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);//PWR_MAINREGULATOR_ON/PWR_LOWPOWERREGULATOR_ON
 	HAL_ResumeTick();
 
 }
